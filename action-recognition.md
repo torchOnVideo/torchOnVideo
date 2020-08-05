@@ -10,3 +10,8 @@ Repo at: ```https://github.com/decisionforce/TPN```
 
 ### TRN-Pytorch
 Repo at: ```https://github.com/zhoubolei/TRN-pytorch```
+
+### 3D Resnets for Action Recognition
+Repo at: ```https://github.com/kenshohara/3D-ResNets-PyTorch```
+
+
