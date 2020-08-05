@@ -7,3 +7,8 @@
 - Paper : Can Spatiotemporal 3D CNNs Retrace the History of 2D CNNs and ImageNet<br />
   [Code](https://github.com/kenshohara/video-classification-3d-cnn-pytorch)
 - [Another](https://github.com/Yidadaa/Pytorch-Video-Classification) good repository using UCF101 Dataset
+
+AVid Dataset
+Charades Dataset
+UCF Dataset
+@shambhavi please add more datasets which can be useful
