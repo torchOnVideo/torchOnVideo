@@ -4,9 +4,9 @@ import torch.nn as nn
 from .base_networks import *
 from .dpbns import DBPNS
 
-class Net(nn.Module):
+class RBPN(nn.Module):
     def __init__(self, num_channels, base_filter, feat, num_stages, n_resblock, nFrames, scale_factor):
-        super(Net, self).__init__()
+        super(RBPN, self).__init__()
         # base_filter=256
         # feat=64
         self.nFrames = nFrames

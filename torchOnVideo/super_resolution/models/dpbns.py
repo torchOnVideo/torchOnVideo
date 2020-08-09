@@ -1,4 +1,4 @@
-from base_networks import *
+from .base_networks import *
 import torch.nn as nn
 import torch
 
