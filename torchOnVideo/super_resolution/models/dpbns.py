@@ -56,11 +56,11 @@ class DBPNS(nn.Module):
         return x
 
 # if __name__ == '__main__':
-base_filter = 256
-feat = 64
-num_stages = 3
-scale_factor = 4
-DBPNS(base_filter, feat, num_stages, scale_factor)
+# base_filter = 256
+# feat = 64
+# num_stages = 3
+# scale_factor = 4
+# DBPNS(base_filter, feat, num_stages, scale_factor)
 
 
 
