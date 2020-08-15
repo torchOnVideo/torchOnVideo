@@ -3,7 +3,7 @@ import time
 
 
 class MSVDSplitConfig:
-    model = "MSVD_ResNet152"
+    model = "MSVD_ResNet101"
 
     video_fpath = "data/MSVD/features/{}.hdf5".format(model)
     caption_fpath = "data/MSVD/metadata/MSR Video Description Corpus.csv"
@@ -18,7 +18,7 @@ class MSVDSplitConfig:
 
 
 class MSRVTTSplitConfig:
-    model = "MSR-VTT-v2016_ResNet152"
+    model = "MSR-VTT_ResNet101"
 
     video_fpath = "data/MSR-VTT/features/{}.hdf5".format(model)
     train_val_caption_fpath = "data/MSR-VTT/metadata/train_val_videodatainfo.json"
@@ -34,7 +34,7 @@ class MSRVTTSplitConfig:
 
 
 class FeatureConfig:
-    models = [ "MSVD_ResNet152" ]
+    models = [ "MSVD_ResNet101" ]
     size = 0
     for model in models:
         if 'AlexNet' in model:
@@ -100,145 +100,76 @@ class DecoderConfig:
     rnn_teacher_forcing_ratio = 1.0
 
 
-# class TrainConfig:
-#
-#     corpus = 'MSVD'; assert corpus in [ 'MSVD', 'MSR-VTT' ]
-#
-#     feat = FeatureConfig
-#     vocab = VocabConfig
-#     loader = {
-#         'MSVD': MSVDLoaderConfig,
-#         'MSR-VTT': MSRVTTLoaderConfig
-#     }[corpus]
-#     decoder = DecoderConfig
-#
-#
-#     """ Optimization """
-#     epochs = {
-#         'MSVD': 50,
-#         'MSR-VTT': 30,
-#     }[corpus]
-#     batch_size = 200
-#     shuffle = True
-#     optimizer = "AMSGrad"
-#     gradient_clip = 5.0 # None if not used
-#     lr = {
-#         'MSVD': 5e-5,
-#         'MSR-VTT': 2e-4,
-#     }[corpus]
-#     lr_decay_start_from = 20
-#     lr_decay_gamma = 0.5
-#     lr_decay_patience = 5
-#     weight_decay = 1e-5
-#     reg_lambda = 0.
-#
-#     """ Pretrained Model """
-#     pretrained_decoder_fpath = None
-#
-#     """ Evaluate """
-#     metrics = [ 'Bleu_4', 'CIDEr', 'METEOR', 'ROUGE_L' ]
-#
-#     """ ID """
-#     exp_id = "SA-LSTM"
-#     feat_id = "FEAT {} mfl-{} fsl-{} mcl-{}".format('+'.join(feat.models), loader.frame_max_len, loader.frame_sample_len,
-#                                                     loader.max_caption_len)
-#     embedding_id = "EMB {}".format(vocab.embedding_size)
-#     decoder_id = "DEC {}-{}-l{}-h{} at-{}".format(
-#         ["uni", "bi"][decoder.rnn_num_directions-1], decoder.rnn_type,
-#         decoder.rnn_num_layers, decoder.rnn_hidden_size, decoder.rnn_attn_size)
-#     optimizer_id = "OPTIM {} lr-{}-dc-{}-{}-{}-wd-{} rg-{}".format(
-#         optimizer, lr, lr_decay_start_from, lr_decay_gamma, lr_decay_patience, weight_decay, reg_lambda)
-#     hyperparams_id = "bs-{}".format(batch_size)
-#     if gradient_clip is not None:
-#         hyperparams_id += " gc-{}".format(gradient_clip)
-#     timestamp = time.strftime("%y%m%d-%H:%M:%S", time.gmtime())
-#     model_id = " | ".join([ exp_id, corpus, feat_id, embedding_id, decoder_id, optimizer_id, timestamp ])
-#
-#     """ Log """
-#     log_dpath = "logs/{}".format(model_id)
-#     ckpt_dpath = os.path.join("checkpoints", model_id)
-#     ckpt_fpath_tpl = os.path.join(ckpt_dpath, "{}.ckpt")
-#     save_from = 1
-#     save_every = 1
-#
-#     """ TensorboardX """
-#     tx_train_loss = "loss/train"
-#     tx_train_cross_entropy_loss = "loss/train/decoder_CE"
-#     tx_train_entropy_loss = "loss/train/decoder_reg"
-#     tx_val_loss = "loss/val"
-#     tx_val_cross_entropy_loss = "loss/val/decoder_CE"
-#     tx_val_entropy_loss = "loss/val/decoder_reg"
-#     tx_lr = "params/decoder_LR"
 class TrainConfig:
 
-    def __init__(self,c='MSVD',lr=0.0001,ep='500'):
-        corpus = c; assert corpus in [ 'MSVD', 'MSR-VTT' ]
+    corpus = 'MSVD'; assert corpus in [ 'MSVD', 'MSR-VTT' ]
 
-        feat = FeatureConfig
-        vocab = VocabConfig
-        loader = {
-            'MSVD': MSVDLoaderConfig,
-            'MSR-VTT': MSRVTTLoaderConfig
-        }[corpus]
-        decoder = DecoderConfig
+    feat = FeatureConfig
+    vocab = VocabConfig
+    loader = {
+        'MSVD': MSVDLoaderConfig,
+        'MSR-VTT': MSRVTTLoaderConfig
+    }[corpus]
+    decoder = DecoderConfig
 
 
-        """ Optimization """
-        epochs = {
-            'MSVD': ep,
-            'MSR-VTT': ep,
-        }[corpus]
-        batch_size = 200
-        shuffle = True
-        optimizer = "AMSGrad"
-        gradient_clip = 5.0 # None if not used
-        lr = {
-            'MSVD': lr,
-            'MSR-VTT': lr,
-        }[corpus]
-        lr_decay_start_from = 20
-        lr_decay_gamma = 0.5
-        lr_decay_patience = 5
-        weight_decay = 1e-5
-        reg_lambda = 0.
+    """ Optimization """
+    epochs = {
+        'MSVD': 50,
+        'MSR-VTT': 40,
+    }[corpus]
+    batch_size = 200
+    shuffle = True
+    optimizer = "AMSGrad"
+    gradient_clip = 5.0 # None if not used
+    lr = {
+        'MSVD': 5e-5,
+        'MSR-VTT': 2e-4,
+    }[corpus]
+    lr_decay_start_from = 20
+    lr_decay_gamma = 0.5
+    lr_decay_patience = 5
+    weight_decay = 1e-5
+    reg_lambda = 0.
 
-        """ Pretrained Model """
-        pretrained_decoder_fpath = None
+    """ Pretrained Model """
+    pretrained_decoder_fpath = None
 
-        """ Evaluate """
-        metrics = [ 'Bleu_4', 'CIDEr', 'METEOR', 'ROUGE_L' ]
+    """ Evaluate """
+    metrics = [ 'Bleu_4', 'CIDEr' ]
 
-        """ ID """
-        exp_id = "SA-LSTM"
-        feat_id = "FEAT {} mfl-{} fsl-{} mcl-{}".format('+'.join(feat.models), loader.frame_max_len, loader.frame_sample_len,
-                                                        loader.max_caption_len)
-        embedding_id = "EMB {}".format(vocab.embedding_size)
-        decoder_id = "DEC {}-{}-l{}-h{} at-{}".format(
-            ["uni", "bi"][decoder.rnn_num_directions-1], decoder.rnn_type,
-            decoder.rnn_num_layers, decoder.rnn_hidden_size, decoder.rnn_attn_size)
-        optimizer_id = "OPTIM {} lr-{}-dc-{}-{}-{}-wd-{} rg-{}".format(
-            optimizer, lr, lr_decay_start_from, lr_decay_gamma, lr_decay_patience, weight_decay, reg_lambda)
-        hyperparams_id = "bs-{}".format(batch_size)
-        if gradient_clip is not None:
-            hyperparams_id += " gc-{}".format(gradient_clip)
-        timestamp = time.strftime("%y%m%d-%H:%M:%S", time.gmtime())
-        model_id = " | ".join([ exp_id, corpus, feat_id, embedding_id, decoder_id, optimizer_id, timestamp ])
+    """ ID """
+    exp_id = "SA-LSTM"
+    feat_id = "FEAT {} mfl-{} fsl-{} mcl-{}".format('+'.join(feat.models), loader.frame_max_len, loader.frame_sample_len,
+                                                    loader.max_caption_len)
+    embedding_id = "EMB {}".format(vocab.embedding_size)
+    decoder_id = "DEC {}-{}-l{}-h{} at-{}".format(
+        ["uni", "bi"][decoder.rnn_num_directions-1], decoder.rnn_type,
+        decoder.rnn_num_layers, decoder.rnn_hidden_size, decoder.rnn_attn_size)
+    optimizer_id = "OPTIM {} lr-{}-dc-{}-{}-{}-wd-{} rg-{}".format(
+        optimizer, lr, lr_decay_start_from, lr_decay_gamma, lr_decay_patience, weight_decay, reg_lambda)
+    hyperparams_id = "bs-{}".format(batch_size)
+    if gradient_clip is not None:
+        hyperparams_id += " gc-{}".format(gradient_clip)
+    timestamp = time.strftime("%y%m%d-%H:%M:%S", time.gmtime())
+    model_id = " | ".join([ exp_id, corpus, feat_id, embedding_id, decoder_id, optimizer_id, timestamp ])
 
-        """ Log """
-        log_dpath = "logs/{}".format(model_id)
-        ckpt_dpath = os.path.join("checkpoints", model_id)
-        ckpt_fpath_tpl = os.path.join(ckpt_dpath, "{}.ckpt")
-        save_from = 1
-        save_every = 1
+    """ Log """
+    log_dpath = "logs/{}".format(model_id)
+    ckpt_dpath = os.path.join("checkpoints", model_id)
+    ckpt_fpath_tpl = os.path.join(ckpt_dpath, "{}.ckpt")
+    save_from = 1
+    save_every = 1
 
-        """ TensorboardX """
-        tx_train_loss = "loss/train"
-        tx_train_cross_entropy_loss = "loss/train/decoder_CE"
-        tx_train_entropy_loss = "loss/train/decoder_reg"
-        tx_val_loss = "loss/val"
-        tx_val_cross_entropy_loss = "loss/val/decoder_CE"
-        tx_val_entropy_loss = "loss/val/decoder_reg"
-        tx_lr = "params/decoder_LR"
+    """ TensorboardX """
+    tx_train_loss = "loss/train"
+    tx_train_cross_entropy_loss = "loss/train/decoder_CE"
+    tx_train_entropy_loss = "loss/train/decoder_reg"
+    tx_val_loss = "loss/val"
+    tx_val_cross_entropy_loss = "loss/val/decoder_CE"
+    tx_val_entropy_loss = "loss/val/decoder_reg"
+    tx_lr = "params/decoder_LR"
+
 
 
 class EvalConfig:

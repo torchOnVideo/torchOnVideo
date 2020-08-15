@@ -1,14 +1,16 @@
 from __future__ import print_function
-from train import main
+from train import main,pretty_evaluation
 from tensorboardX import SummaryWriter
 import torch
+import run
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-
+from config import EvalConfig as Ev
 from utils import evaluate, get_lr, load_checkpoint, save_checkpoint, test, train
 from config import TrainConfig as C
 from loader.MSVD import MSVD
 from loader.MSRVTT import MSRVTT
 from models.decoder import Decoder
+from pytorch-video-feature-extractor import main as feat_ext
 from models.caption_generator import CaptionGenerator
 class Describe:
 
@@ -28,11 +30,12 @@ class Describe:
 
     def infer():
         print("Evaluates your model over MSVD dataset")
-        train.pretty_evaluation()
+        run.run(Ev.ckpt_fpath)
         pass
 
     def Create_My_Corpus():
         print("Caution: Computationally expensive")
+        feat_ext.pretty_extractor()
         pass
 
     def view_my_params():
