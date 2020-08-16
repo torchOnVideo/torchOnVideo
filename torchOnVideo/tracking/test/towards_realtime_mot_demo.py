@@ -26,12 +26,12 @@ Todo:
 
 import logging
 import argparse
-from utils.utils import *
-from utils.log import logger
-from utils.timer import Timer
-from utils.parse_config import parse_model_cfg
-import utils.datasets as datasets
-from track import eval_seq
+from utils.towards_realtime_mot.utils import *
+from utils.towards_realtime_mot.log import logger
+from utils.towards_realtime_mot.timer import Timer
+from utils.towards_realtime_mot.parse_config import parse_model_cfg
+import utils.towards_realtime_mot.datasets as datasets
+from tracker.towards_realtime_mot.track import eval_seq
 
 
 logger.setLevel(logging.INFO)

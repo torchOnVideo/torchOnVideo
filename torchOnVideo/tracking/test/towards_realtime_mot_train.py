@@ -3,11 +3,11 @@ import json
 import time
 from time import gmtime, strftime
 import test
-from models import *
+from models.towards_realtime_mot_models import *
 from shutil import copyfile
-from utils.datasets import JointDataset, collate_fn
-from utils.utils import *
-from utils.log import logger
+from utils.towards_realtime_mot.datasets import JointDataset, collate_fn
+from utils.towards_realtime_mot.utils import *
+from utils.towards_realtime_mot.log import logger
 from torchvision.transforms import transforms as T
 
 

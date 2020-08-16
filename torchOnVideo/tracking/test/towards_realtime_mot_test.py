@@ -6,10 +6,10 @@ from pathlib import Path
 from sklearn import metrics
 from scipy import interpolate
 import torch.nn.functional as F
-from models import *
-from utils.utils import *
+from models.towards_realtime_mot_models import *
+from utils.towards_mot_models.utils import *
 from torchvision.transforms import transforms as T
-from utils.datasets import LoadImagesAndLabels, JointDataset, collate_fn
+from utils.towards_mot_models.datasets import LoadImagesAndLabels, JointDataset, collate_fn
 
 def test(
         cfg,
