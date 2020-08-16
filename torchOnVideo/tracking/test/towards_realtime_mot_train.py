@@ -184,7 +184,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', type=int, default=30, help='number of epochs')
     parser.add_argument('--batch-size', type=int, default=32, help='size of each image batch')
     parser.add_argument('--accumulated-batches', type=int, default=1, help='number of batches before optimizer step')
-    parser.add_argument('--cfg', type=str, default='cfg/yolov3.cfg', help='cfg file path')
+    parser.add_argument('--cfg', type=str, default='cfg/towards_realtime_MOT/yolov3_576x320.cfg', help='cfg file path')
     parser.add_argument('--weights-from', type=str, default='weights/',
                         help='Path for getting the trained model for resuming training (Should only be used with '
                              '--resume)')
@@ -193,7 +193,7 @@ if __name__ == '__main__':
                              'with timestamp in the given path')
     parser.add_argument('--save-model-after', type=int, default=10,
                         help='Save a checkpoint of model at given interval of epochs')
-    parser.add_argument('--data-cfg', type=str, default='cfg/ccmcpe.json', help='coco.data file path')
+    parser.add_argument('--data-cfg', type=str, default='cfg/towards_realtime_MOT/ccmcpe.json', help='coco.data file path')
     parser.add_argument('--img-size', type=int, default=[1088, 608], nargs='+', help='pixels')
     parser.add_argument('--resume', action='store_true', help='resume training flag')
     parser.add_argument('--print-interval', type=int, default=40, help='print interval')
