@@ -1,10 +1,10 @@
-from  .fastdvdnet import  FastDVDNet
+from .fastdvdnet import  FastDVDNet
 
 from ..models.fastdvdnet import FastDVDnet as FastDVDNet_model
 
 class TrainModel(FastDVDNet):
     def __init__(self):
-        super(FastDVDNet, self).__init__()
+        super(TrainModel, self).__init__()
 
     def __call__(self, *args, **kwargs):
 
