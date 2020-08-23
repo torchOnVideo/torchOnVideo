@@ -39,3 +39,11 @@ def optical_flow_warp(image, image_optical_flow):
     grid = grid.transpose(3, 2)
     output = F.grid_sample(image, grid, padding_mode='border')
     return output
+
+
+def L1_regularization(image):
+    b, _, h, w = image.size()
+    reg_x_1 = image[:, :, 0:h-1, 0:w-1] - image[:, :, 1:, 0:w-1]
+    reg_y_1 = image[:, :, 0:h-1, 0:w-1] - image[:, :, 0:h-1, 1:]
+    reg_L1 = torch.abs(reg_x_1) + torch.abs(reg_y_1)
+    return torch.sum(reg_L1) / (b*(h-1)*(w-1))

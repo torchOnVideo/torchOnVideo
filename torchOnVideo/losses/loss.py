@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 from torchvision.models.vgg import vgg16
 
+from ..super_resolution.utils import optical_flow_warp, L1_regularization
+
 class ISeeBetterLoss(nn.Module):
     def __init__(self):
         super(ISeeBetterLoss, self).__init__()
@@ -43,3 +45,8 @@ class TVLoss(nn.Module):
     @staticmethod
     def tensor_size(t):
         return t.size()[1] * t.size()[2] * t.size()[3]
+
+def OFR_loss(x0, x1, optical_flow):
+    warped = optical_flow_warp(x0, optical_flow)
+    loss = torch.mean(torch.abs(x1 - warped)) + 0.1 * L1_regularization(optical_flow)
+    return loss
