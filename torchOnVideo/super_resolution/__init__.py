@@ -35,3 +35,6 @@
 #Video Dataset Links:
 # https://github.com/MohsenFayyaz89/PyTorch_Video_Dataset/blob/master/GeneralVideoDataset.py
 # https://github.com/Emily0219/video-dataset-preprocess
+
+from .SOF_VSR import SOF_VSR
+
