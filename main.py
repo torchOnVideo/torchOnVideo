@@ -31,4 +31,6 @@ SOF_VSR_OBJ.run_models()
 
 tm_obj = TrainModel(scale=4)
 tm_obj()
->>>>>>> aa908c02348f03b019611579567f4cb990640b31
+# >>>>>>> aa908c02348f03b019611579567f4cb990640b31
+
+# from torchOnVideo.frame_interpolation.models import CAIN
