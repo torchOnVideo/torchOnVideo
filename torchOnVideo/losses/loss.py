@@ -50,3 +50,36 @@ def OFR_loss(x0, x1, optical_flow):
     warped = optical_flow_warp(x0, optical_flow)
     loss = torch.mean(torch.abs(x1 - warped)) + 0.1 * L1_regularization(optical_flow)
     return loss
+
+
+class Module_CharbonnierLoss(nn.Module):
+    def __init__(self, epsilon=0.001):
+        super(Module_CharbonnierLoss, self).__init__()
+        self.epsilon = epsilon
+
+    def forward(self, output, gt):
+        return torch.mean(torch.sqrt((output - gt) ** 2 + self.epsilon ** 2))
+
+
+# AdaCoF loss for Frame interpolation
+class AdaCoF_loss(nn.modules.loss._Loss):
+    def __init__(self, weight_charbonnier=1, weight_gSpatial=0.01, weight_gOcclusion=0.005):
+        self.weight_charbonnier = weight_charbonnier
+        self.weight_gSpatial = weight_gSpatial
+        self.weight_gOcclusion = weight_gOcclusion
+
+        self.charbonnier_loss = Module_CharbonnierLoss()
+
+    def forward(self, output, gt, input_frames):
+            losses = []
+
+            # calculating charbonnerloss
+            losses.append(self.weight_charbonnier *self.charbonnier_loss(output['frame1'], gt))
+            # calculating gspatial component
+            losses.append(self.weight_gSpatial * output['g_Spatial'])
+            # calculating gocclusion component
+            losses.append(self.weight_gOcclusion * output['g_Occlusion'])
+
+            loss_sum = sum(losses)
+
+            return loss_sum

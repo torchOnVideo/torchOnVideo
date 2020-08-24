@@ -34,3 +34,4 @@ tm_obj()
 # >>>>>>> aa908c02348f03b019611579567f4cb990640b31
 
 # from torchOnVideo.frame_interpolation.models import CAIN
+from torchOnVideo.datasets.Vimeo90KTriplet.frame_interpolation.train_adacof import TrainAdaCoF

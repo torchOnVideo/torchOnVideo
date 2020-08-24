@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59eac7d1-6550-4a57-b74f-ecdf4a3f2878" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/adacofnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/base_networks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/cain.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/cain_encdec.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/cain_noca.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Vimeo90KTriplet/frame_interpolation/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Vimeo90KTriplet/frame_interpolation/train_adacof.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/adacof.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/train_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/frame_interpolation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/test_SOFVSR.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/test_SOFVSR.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/super_resolution/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/train_SOFVSR.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/train_SOFVSR.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/adacofnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/models/adacofnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/losses/loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/losses/loss.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,10 +179,10 @@
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state x="717" y="459" width="553" height="202" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.34.1853.1046@67.34.1853.1046" timestamp="1598175796891" />
-    <state x="562" y="220" width="862" height="674" key="find.popup" timestamp="1598237336917">
+    <state x="562" y="220" width="862" height="674" key="find.popup" timestamp="1598268500954">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state x="562" y="220" width="862" height="674" key="find.popup/67.34.1853.1046@67.34.1853.1046" timestamp="1598237336917" />
+    <state x="562" y="220" width="862" height="674" key="find.popup/67.34.1853.1046@67.34.1853.1046" timestamp="1598268500954" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
