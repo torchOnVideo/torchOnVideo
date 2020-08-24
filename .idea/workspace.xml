@@ -2,11 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59eac7d1-6550-4a57-b74f-ecdf4a3f2878" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/test_SOFVSR.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/train_SOFVSR.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/test_SOFVSR.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/references.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/action_recognition/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/data/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/data/dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/losses/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/losses/loss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/metrics/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/SOF_VSR.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/evaluate_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/train_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SuperResolution.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/iSeeBetter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/Efficient_ResBlocks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/OFRnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/SOFVSR.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/SRGAN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/SRnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/base_networks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/dpbns.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/models/rbpn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Video_Classification.md" beforeDir="false" afterPath="$PROJECT_DIR$/Video_Classification.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Video_SuperResolution.md" beforeDir="false" afterPath="$PROJECT_DIR$/Video_SuperResolution.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +61,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../SOF-VSR" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
