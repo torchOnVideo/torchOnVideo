@@ -70,6 +70,8 @@ class TrainModel(AdaCoF):
         # Shardul Main part -- loss is left
         if loss in None:
             self.loss = AdaCoF_loss()
+        else:
+            self.loss = loss
 
         # self.current_epoch = start_epoch
 
@@ -142,6 +144,8 @@ class TrainModel(AdaCoF):
                 self.optimizer.zero_grad()
 
                 output = self.model(frame0, frame2)
+
+                # currently uses only AdaCoF loss
                 loss = self.loss(output, frame1, [frame0, frame2])
                 loss.backward()
                 self.optimizer.step()
