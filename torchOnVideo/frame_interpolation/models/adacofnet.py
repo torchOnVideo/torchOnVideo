@@ -155,12 +155,11 @@ class KernelEstimation(torch.nn.Module):
 
 
 class AdaCoFNet(torch.nn.Module):
-    def __init__(self, args):
+    def __init__(self, kernel_size, dilation):
         super(AdaCoFNet, self).__init__()
-        self.args = args
-        self.kernel_size = args.kernel_size
-        self.kernel_pad = int(((args.kernel_size - 1) * args.dilation) / 2.0)
-        self.dilation = args.dilation
+        self.kernel_size = kernel_size
+        self.dilation = dilation
+        self.kernel_pad = int(((self.kernel_size - 1) * self.dilation) / 2.0)
 
         self.get_kernel = KernelEstimation(self.kernel_size)
 
