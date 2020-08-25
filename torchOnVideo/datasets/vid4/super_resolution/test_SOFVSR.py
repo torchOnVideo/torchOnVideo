@@ -1,12 +1,15 @@
 from torch.utils.data import Dataset
-
+from PIL import Image
+import os
+import numpy as np
+from torchOnVideo.super_resolution.utils import *
 
 class TestSOFVSR(Dataset):
-    def __init__(self, cfg, video_name):
+    def __init__(self,  testset_dir, video_name, degradation, scale):
         super(TestSOFVSR).__init__()
-        self.dataset_dir = cfg.testset_dir + '/' + video_name
-        self.degradation = cfg.degradation
-        self.scale = cfg.scale
+        self.dataset_dir = testset_dir + '/' + video_name
+        self.degradation = degradation
+        self.scale = scale
         self.frame_list = os.listdir(self.dataset_dir + '/lr_x' + str(self.scale) + '_' + self.degradation)
 
     def __getitem__(self, idx):
