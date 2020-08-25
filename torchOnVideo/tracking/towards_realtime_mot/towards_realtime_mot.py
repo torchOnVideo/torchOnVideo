@@ -28,6 +28,16 @@ class TowardsRealtimeMOT:
 def create_modules(module_defs):
     """
     Constructs module list of layer blocks from module configuration in module_defs
+
+    Patameters
+    ---------------
+    module_defs: hyperparameters
+
+    Returns
+    ---------------
+    hyperparameters, module_list
+
+
     """
     hyperparams = module_defs.pop(0)
     output_filters = [int(hyperparams['channels'])]
