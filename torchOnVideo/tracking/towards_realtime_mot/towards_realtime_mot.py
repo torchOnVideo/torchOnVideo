@@ -14,6 +14,17 @@ try:
 except ImportError:
     batch_norm=nn.BatchNorm2d
 
+
+
+class TowardsRealtimeMOT:
+
+    def __init__(self):
+        pass
+
+    def __eval__(self):
+        pass
+
+
 def create_modules(module_defs):
     """
     Constructs module list of layer blocks from module configuration in module_defs

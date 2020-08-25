@@ -6,7 +6,6 @@ This module does Video Tracking
 """
 
 
-
 import torch
 import numpy as np
 
