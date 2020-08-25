@@ -37,7 +37,64 @@ pip install torchOnVideo
 
 ## Snippets & Examples
 
+
 The following snippets provide a sneak peek at the functionalities of torchOnVideo.
+
+For all the cases we want to run the task of frame interpolation using the technique explained in the paper **Adaptive Collaboration of Flows for Video Frame Interpolation - AdaCoF net for short**, a state of the art paper by the researchers at the Yonsei university
+
+### Train and save the exact training strategy as in the paper (default strategy):
+
+~~~python
+# call TrainModel class from adacof submodule of frame_interpolation
+from torchOnVideo.frame_interpolation.adacof import TrainModel
+adacof_obj = TrainModel()
+adacof_obj()
+~~~
+
+### Train with another model on AdaCoF:
+
+Here we demonstrate the flexibility of our library. Here, we are plugging in another model called MyNet and passing it to the TrainModel class
+~~~python
+# Training AdaCoF with own model
+from mynet import MyNet
+adacof_obj2 = TrainModel(model=MyNet)
+adacof_obj2()
+~~~
+
+Likewise, one can change the dataset, dataloader, scheduler, optimizer and many more options.
+
+### Test on AdaCoF:
+
+~~~python
+# Using the testing functionality
+from torchOnVideo.frame_interpolation.adacof import TestModel
+adacof_obj_test = TestModel()
+adacof_obj_test(1)
+~~~
+The flexibility for TestModel is exactly the same as in TrainModel
+
+
+### Directly using a model:
+Suppose the user want to access the model(s) used in the paper. I can easily import the AdaCoFNet model and import it in my own code.
+
+~~~python
+# Directly using AdaCoFNet Model
+from torchOnVideo.frame_interpolation.models import AdaCoFNet
+kernel_size = 5
+dilation = 1
+model = AdaCoFNet(kernel_size, dilation)
+~~~
+
+### Using our provided custom dataset classes:
+For eg if one wants to use the TrainAdaCoF dataset class built in the *Vimeo90K Triplet* dataset
+~~~python
+# Using the custom dataset class of AdaCoF
+from torchOnVideo.datasets.Vimeo90KTriplet.frame_interpolation import TrainAdaCoF
+train_set = TrainAdaCoF()
+~~~
+
+
+
 
 
 
