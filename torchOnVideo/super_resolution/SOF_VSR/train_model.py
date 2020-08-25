@@ -3,37 +3,87 @@ import torch.nn as nn
 from torch.autograd import Variable
 import torch.nn.functional as F
 import numpy as np
+from torch.utils.data import DataLoader
+import torch.optim as optim
+import torch.optim.lr_scheduler as lr_scheduler
+import os
 
 from ..SOF_VSR import SOF_VSR
 from ..models import SOFVSR, OFRnet, SRnet
+from torchOnVideo.datasets.CVDL.super_resolution import TrainSOFVSR
+from torchOnVideo.losses import OFR_loss
 
 
 # gpu mode
 # config
 # why does this paper not need  any epochs?
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--degradation", type=str, default='BI')
+parser.add_argument("--scale", type=int, default=4)
+# Shardul Change here
+# parser.add_argument('--gpu_mode', type=bool, default=True)
+parser.add_argument('--gpu_mode', type=bool, default=False
+                    )
+parser.add_argument('--patch_size', type=int, default=32)
+parser.add_argument('--batch_size', type=int, default=32)
+parser.add_argument('--n_iters', type=int, default=200000, help='number of iterations to train')
+parser.add_argument('--trainset_dir', type=str, default='data/train')
+# return parser.parse_args()
+
 class TrainModel(SOF_VSR):
-    def __init__(self, scale):
+    def __init__(self, model=None, train_set=None, train_dir='../../db/CVDL_SOFVSR_traindata',
+                 train_data_loader=None, loss=None, checkpoint=None, start_epoch=0, use_start_epoch_checkpoint=False,
+                 output_dir="../../outputs/CVDL_SOFVSR",
+                 scale = 4, patch_size=32, degradation='BI',
+                 epochs=20, batch_size=32, shuffle=True, num_workers=4,
+                 n_iters=200000,
+                 optimizer=None, lr=1e-3, milestone=[80000, 16000],
+                 scheduler=None,
+                 epoch_display_step=1, batch_display_step=1,
+                 run_validation=False, val_dir="../../db/f16_vnlnet_valdata", val_set=None, val_loader=None):
+
         super(TrainModel, self).__init__(scale=scale)
-        self.SOF_VSR_net = SOFVSR(cfg, is_training=True)
 
-        # SHARDUL PLACEHOLDER
-        # dataloader
-        self.train_set = TrainsetLoader(cfg)
-        self.train_loader = DataLoader(self.train_set, num_workers=4, batch_size=cfg.batch_size, shuffle=True)
-        ##########
+        self.degradationn = degradation
 
-        self.optimizer = torch.optim.Adam(self.SOF_VSR_net.parameters(), lr=1e-3)
-        self.milestones = [80000, 160000]
-        scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=self.milestones, gamma=0.1)
+        if train_set is None:
+            self.train_set = TrainSOFVSR(trainset_dir=train_dir, scale=scale, patch_size=patch_size, n_iters=n_iters,
+                                         batch_size=batch_size, degradation=degradation)
+        else:
+            self.train_set = train_set
 
-        self.criterion = torch.nn.MSELoss()
-        self.loss_list = []
+        if train_data_loader is None:
+            self.train_loader = DataLoader(dataset=self.train_set, batch_size=batch_size, shuffle=shuffle,
+                                           num_workers=num_workers)
+        else:
+            self.train_loader = train_data_loader
 
-    def get_models(self):
-        pass
+        if model is None:
+            self.model = SOFVSR(scale=scale)
+        else:
+            self.model = model
+
+        if optimizer is None:
+            self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
+        else:
+            self.optimizer = optimizer
+
+        if scheduler is None:
+            self.scheduler = lr_scheduler.MultiStepLR(self.optimizer, milestones=milestone, gamma=0.01)
+        else:
+            self.scheduler = scheduler
+
+        if loss in None:
+            self.criterion = nn.MSELoss(size_average=False)
+        else:
+            self.criterion = loss
+
+        self.max_step = self.train_loader.__len__()
 
     def __call__(self, *args, **kwargs):
+        self.model.train()
+        loss_list = []
         for idx_iter, (LR, HR) in enumerate(self.train_loader):
             self.scheduler.step()
 
@@ -42,26 +92,30 @@ class TrainModel(SOF_VSR):
             idx_center = (n_frames - 1) // 2
 
             LR, HR = Variable(LR), Variable(HR)
-            if cfg.gpu_mode:
-                LR = LR.cuda()
-                HR = HR.cuda()
+
+            # SHardul check gpu
+            # if cfg.gpu_mode:
+            #     LR = LR.cuda()
+            #     HR = HR.cuda()
             LR = LR.view(b, -1, 1, h_lr, w_lr)
-            HR = HR.view(b, -1, 1, h_lr * cfg.scale, w_lr * cfg.scale)
+            HR = HR.view(b, -1, 1, h_lr * self.scale, w_lr * self.scale)
 
             # inference
-            flow_L1, flow_L2, flow_L3, SR = self.SOF_VSR_net(LR)
+            flow_L1, flow_L2, flow_L3, SR = self.model(LR)
 
             # loss
             loss_SR = self.criterion(SR, HR[:, idx_center, :, :, :])
+
+            # SHARDUL CHECK CUDA
             loss_OFR = torch.zeros(1).cuda()
 
             for i in range(n_frames):
                 if i != idx_center:
-                    loss_L1 = self.OFR_loss(F.avg_pool2d(LR[:, i, :, :, :], kernel_size=2),
-                                            F.avg_pool2d(LR[:, idx_center, :, :, :], kernel_size=2),
-                                            flow_L1[i])
-                    loss_L2 = self.OFR_loss(LR[:, i, :, :, :], LR[:, idx_center, :, :, :], flow_L2[i])
-                    loss_L3 = self.OFR_loss(HR[:, i, :, :, :], HR[:, idx_center, :, :, :], flow_L3[i])
+                    loss_L1 = OFR_loss(F.avg_pool2d(LR[:, i, :, :, :], kernel_size=2),
+                                       F.avg_pool2d(LR[:, idx_center, :, :, :], kernel_size=2),
+                                       flow_L1[i])
+                    loss_L2 = OFR_loss(LR[:, i, :, :, :], LR[:, idx_center, :, :, :], flow_L2[i])
+                    loss_L3 = OFR_loss(HR[:, i, :, :, :], HR[:, idx_center, :, :, :], flow_L3[i])
                     loss_OFR = loss_OFR + loss_L3 + 0.2 * loss_L2 + 0.1 * loss_L1
 
             loss = loss_SR + 0.01 * loss_OFR / (n_frames - 1)
@@ -73,14 +127,14 @@ class TrainModel(SOF_VSR):
             self.optimizer.step()
 
             # save checkpoint
-            # SHARDUL TODO CHECKPOINTING CODE AND DISPLAY
-            if idx_iter % 5000 == 0:
-                print('Iteration---%6d,   loss---%f' % (idx_iter + 1, np.array(loss_list).mean()))
-                save_path = 'log/' + cfg.degradation + '_x' + str(cfg.scale)
-                save_name = cfg.degradation + '_x' + str(cfg.scale) + '_iter' + str(idx_iter) + '.pth'
-                if not os.path.exists(save_path):
-                    os.mkdir(save_path)
-                torch.save(net.state_dict(), save_path + '/' + save_name)
-                loss_list = []
+            # Shardul saving
+            # if idx_iter % 5000 == 0:
+            #     print('Iteration---%6d,   loss---%f' % (idx_iter + 1, np.array(loss_list).mean()))
+            #     save_path = 'log/' + self.degradation + '_x' + str(self.scale)
+            #     save_name = self.degradation + '_x' + str(self.scale) + '_iter' + str(idx_iter) + '.pth'
+            #     if not os.path.exists(save_path):
+            #         os.mkdir(save_path)
+            #     torch.save(self.model.state_dict(), save_path + '/' + save_name)
+            #     loss_list = []
 
-            # SHARDUL TODO DECIDE WHAT TO RETURN
+

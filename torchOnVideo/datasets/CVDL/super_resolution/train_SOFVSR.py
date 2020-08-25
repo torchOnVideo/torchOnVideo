@@ -2,20 +2,20 @@ import os
 import random
 from PIL import Image
 import numpy as np
-
+import torch
 from torch.utils.data import Dataset
 
-from torchOnVideo.denoising.utils import rgb2y, random_crop
+from torchOnVideo.super_resolution.utils import rgb2y, random_crop, augmentation_SOFVSR
 
 class TrainSOFVSR(Dataset):
-    def __init__(self, cfg):
+    def __init__(self, trainset_dir, scale, patch_size, n_iters, batch_size, degradation):
         super(TrainSOFVSR).__init__()
-        self.trainset_dir = cfg.trainset_dir
-        self.scale = cfg.scale
-        self.patch_size = cfg.patch_size
-        self.n_iters = cfg.n_iters * cfg.batch_size
-        self.video_list = os.listdir(cfg.trainset_dir)
-        self.degradation = cfg.degradation
+        self.trainset_dir = trainset_dir
+        self.scale = scale
+        self.patch_size = patch_size
+        self.n_iters = n_iters * batch_size
+        self.video_list = os.listdir(trainset_dir)
+        self.degradation = degradation
 
     def __getitem__(self, idx):
         idx_video = random.randint(0, len(self.video_list)-1)
@@ -60,9 +60,11 @@ class TrainSOFVSR(Dataset):
         LR = np.concatenate((LR0, LR1, LR2), axis=2)
 
         # data augmentation
-        LR, HR = augmentation()(LR, HR)
+        LR, HR = augmentation_SOFVSR()(LR, HR)
 
-        return toTensor(LR), toTensor(HR)
+        LR_tensor = torch.from_numpy(LR.transpose((2, 0, 1)))
+        HR_tensor = torch.from_numpy(HR.transpose((2, 0, 1)))
+        return LR_tensor, HR_tensor
 
     def __len__(self):
         return self.n_iters

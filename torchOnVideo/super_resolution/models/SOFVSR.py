@@ -10,12 +10,12 @@ from ..utils import optical_flow_warp
 
 
 class SOFVSR(nn.Module):
-    def __init__(self, cfg, n_frames=3, is_training=True):
+    def __init__(self, scale, n_frames=3, is_training=True):
         super(SOFVSR, self).__init__()
-        self.scale = cfg.scale
+        self.scale = scale
         self.is_training = is_training
-        self.OFR = OFRnet(scale=cfg.scale, channels=320)
-        self.SR = SRnet(scale=cfg.scale, channels=320, n_frames=n_frames)
+        self.OFR = OFRnet(scale=scale, channels=320)
+        self.SR = SRnet(scale=scale, channels=320, n_frames=n_frames)
 
     def forward(self, x):
         b, n_frames, c, h, w = x.size()     # x: b*n*c*h*w
