@@ -1,0 +1,8 @@
+python
+numpy
+pytorch
+torchvision
+opencv-python
+scikit-image
+tqdm
+pytorch-ssim
