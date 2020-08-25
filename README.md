@@ -3,3 +3,14 @@
 
 # torchOnVideo
 Awesome video library for PyTorch
+
+## References:
+https://github.com/myungsub/CAIN
+https://github.com/HyeongminLEE/AdaCoF-pytorch
+https://github.com/LongguangWang/SOF-VSR
+https://github.com/amanchadha/iSeeBetter
+https://github.com/axeldavy/vnlnet
+
+
+
+
