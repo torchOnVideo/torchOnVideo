@@ -2,7 +2,7 @@ from torch.utils.data import Dataset
 from PIL import Image
 import os
 import numpy as np
-from torchOnVideo.super_resolution.utils import rgb2ycbcr
+from torchOnVideo.super_resolution.utils import *
 
 class TestSOFVSR(Dataset):
     def __init__(self, cfg, video_name):
