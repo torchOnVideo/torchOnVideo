@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="59eac7d1-6550-4a57-b74f-ecdf4a3f2878" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/super_resolution/iseebetter/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/iseebetter/train_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
