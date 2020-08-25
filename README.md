@@ -118,6 +118,12 @@ https://github.com/axeldavy/vnlnet
 
 https://github.com/learnables/learn2learn/blob/master/README.md
 
+https://github.com/Zhongdao/Towards-Realtime-MOT
+
+https://github.com/ifzhang/FairMOT
+
+
+
 
 
 
