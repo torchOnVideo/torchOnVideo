@@ -13,6 +13,11 @@ from utils import *
 
 
 class TrainModel( Towards_Realtime_MOT ):
+    """ 
+    Interface to Train the model of Towards_Realtime_MOT
+    """
+
+
     def __init__(self,
         cfg,
         data_cfg,
@@ -27,6 +32,27 @@ class TrainModel( Towards_Realtime_MOT ):
         freeze_backbone=false,
         opt=none,
     ):
+        """ 
+        Initializer function
+
+        used to initialize Model Trainer for Towards Realtime MOT
+
+        Parameters:
+        -------------------
+        cfg,
+        data_cfg,
+        weights_from="",
+        weights_to="",
+        save_every=10,
+        img_size=(1088, 608),
+        resume=false,
+        epochs=100,
+        batch_size=16,
+        accumulated_batches=1,
+        freeze_backbone=false,
+        opt=none
+
+        """
 
         super(TrainModel, self).__init__()
         self.model = Darknet(cfg, dataset.nID)
