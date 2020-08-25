@@ -8,28 +8,10 @@ import os
 
 from .vnlnet import VNLNet
 from ..models import ModifiedDnCNN
+from tensorboardX import SummaryWriter
 from .utils import weights_init_kaiming, batch_PSNR
 
 from torchOnVideo.datasets.f16_video_dataset.denoising import TrainVNLNet
-
-# Shardul check problems with val_dir
-parser = argparse.ArgumentParser(description='VNLnet Training')
-# parser.add_argument('--train_dir', type=str, default='train/', help='Path containing the training data')
-parser.add_argument('--val_dir', type=str, default='val/', help='Path containing the validation data')
-parser.add_argument('--save_dir', type=str, default='mynetwork', help='Path to store the logs and the network')
-parser.add_argument('--batch_size', type=int, default=128, help='Training batch size')
-parser.add_argument('--epochs', type=int, default=20, help='Number of training epochs')
-parser.add_argument('--milestone', nargs=2, type=int, default=[12, 17], help='When to decay learning rate')
-parser.add_argument('--lr', type=float, default=1e-3, help='Initial learning rate')
-parser.add_argument('--sigma', type=float, default=20, help='Simulated noise level')
-parser.add_argument('--color', action='store_true', help='Train with color instead of grayscale')
-parser.add_argument('--oracle_mode', type=int, default=0, help='Oracle mode (0: no oracle, 1: image ground truth)')
-parser.add_argument('--past_frames', type=int, default=7, help='Number of past frames')
-parser.add_argument('--future_frames', type=int, default=7, help='Number of future frames')
-parser.add_argument('--search_window_width', type=int, default=41, help='Search window width for the matches')
-parser.add_argument('--nn_patch_width', type=int, default=41, help='Width of the patches for matching')
-parser.add_argument('--pass_nn_value', action='store_true', \
-                    help='Whether to pass the center pixel value of the matches (noisy image)')
 
 
 class TrainModel(VNLNet):
@@ -44,7 +26,8 @@ class TrainModel(VNLNet):
                  sigma=20, color=True, nn_patch_width=41, pass_nn_value=True, oracle_mode=0, search_window_width=41,
                  past_frames=7, future_frames=7,
                  epoch_display_step=1, batch_display_step=1,
-                 run_validation=False, val_dir="../../db/f16_vnlnet_valdata", val_set=None, val_loader=None):
+                 run_validation=False, val_dir="../../db/f16_vnlnet_valdata", val_set=None, val_loader=None,
+                 save_dir="../../db/f_16_vnlnet_save_dir"):
 
         self.sigma = sigma / 255.
         self.color = color
@@ -58,7 +41,9 @@ class TrainModel(VNLNet):
         self.batch_display_step = batch_display_step
         self.run_validation = run_validation
         self.batch_size = batch_size
+        self.save_dir = save_dir
 
+        print('==> Building training set ')
         if train_set is None:
             self.train_set = TrainVNLNet(train_dir, color_mode=self.color, sigma=self.sigma,
                                          oracle_mode=self.oracle_mode, past_frames=self.past_frames,
@@ -69,6 +54,7 @@ class TrainModel(VNLNet):
         else:
             self.train_set = train_set
 
+        print('==> Building training data loader ')
         if train_data_loader is None:
             self.train_loader = DataLoader(dataset=self.train_set, batch_size=batch_size, shuffle=shuffle,
                                            num_workers=num_workers)
@@ -82,6 +68,7 @@ class TrainModel(VNLNet):
         self.dnnconv_features = (192 if self.color else 64)
         self.dnnconv_layers = 15
 
+        print('==> Building model ')
         if model is None:
             self.model = ModifiedDnCNN(input_channels=self.input_channels,
                                        output_channels=self.output_channels,
@@ -92,16 +79,19 @@ class TrainModel(VNLNet):
         else:
             self.model = model
 
+        print('==> Building optimizer ')
         if optimizer is None:
             self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
         else:
             self.optimizer = optimizer
 
+        print('==> Building scheduler ')
         if scheduler is None:
             self.scheduler = lr_scheduler.MultiStepLR(self.optimizer, milestones=milestone, gamma=0.01)
         else:
             self.scheduler = scheduler
 
+        print("==>Building Loss")
         if loss in None:
             self.criterion = nn.MSELoss(size_average=False)
         else:
@@ -109,6 +99,7 @@ class TrainModel(VNLNet):
 
         self.max_step = self.train_loader.__len__()
 
+        print("==>Building Validation Components")
         if run_validation:
             if val_set is None:
                 self.val_set = TrainVNLNet(val_dir, color_mode=self.color, sigma=self.sigma,
@@ -121,19 +112,21 @@ class TrainModel(VNLNet):
                 self.val_set = val_set
 
             if val_loader is None:
-                self.val_loader = DataLoader(dataset=self.val_set, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
+                self.val_loader = DataLoader(dataset=self.val_set, batch_size=batch_size, shuffle=shuffle,
+                                             num_workers=num_workers)
             else:
                 self.val_loader = val_loader
 
-        # Shardul Check if needed
-        # # Move to GPU
-        # device = torch.device("cuda:0")
-        # model.to(device)
-        # criterion.cuda()
+        device = torch.device("cuda:0")
+        model.to(device)
+        self.criterion.cuda()
+
+        if not os.path.exists(self.save_dir):
+            os.makedirs(self.save_dir)
+        self.writer = SummaryWriter(self.save_dir)
 
     def __call__(self, *args, **kwargs):
         self.model.train()
-        #### Shardul TODO Manage dataset
 
         for running_epoch in range(self.start_epoch, self.total_epochs):
 
@@ -164,9 +157,8 @@ class TrainModel(VNLNet):
                     print('[epoch %d][%d/%d] loss: %.4f PSNR_train: %.4f' % \
                           (running_epoch + 1, i + 1, len(self.train_loader), loss.item(), psnr_train))
                     # Log the scalar values
-                    writer.add_scalar('loss', loss.item(), i)
-                    writer.add_scalar('PSNR on training data', psnr_train, i)
-
+                    self.writer.add_scalar('loss', loss.item(), i)
+                    self.writer.add_scalar('PSNR on training data', psnr_train, i)
 
             if self.run_validation:
                 self.model.eval()
@@ -182,7 +174,7 @@ class TrainModel(VNLNet):
                 psnr_val *= self.batch_size
 
                 print('\n[epoch %d] PSNR_val: %.4f' % (running_epoch + 1, psnr_val))
-                writer.add_scalar('PSNR on validation data', psnr_val, running_epoch)
+                self.writer.add_scalar('PSNR on validation data', psnr_val, running_epoch)
                 # writer.add_scalar('Learning rate', current_lr, epoch)
 
             net_data = { \

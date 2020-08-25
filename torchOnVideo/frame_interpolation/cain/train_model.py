@@ -12,8 +12,6 @@ from torchOnVideo.frame_interpolation.models import CAIN, CAIN_NoCA, CAIN_EncDec
 from torchOnVideo.frame_interpolation.utils import build_input_CAIN
 
 
-# shardul check
-# add options for the three cain models
 class TrainModel(CAIN):
     def __init__(self, model=None, cain_model=None, train_set=None, train_dir='../../db/Vimeo90K_Triplet_CAIN', random_crop = None,resize = None, augment_s=True, augment_t=True,
                  train_data_loader = None, loss=None, checkpoint=None, start_epoch = 0, use_start_epoch_checkpoint=False,
@@ -25,14 +23,7 @@ class TrainModel(CAIN):
                  epoch_display_step=1, batch_display_step=1,
                  use_dataparallel=False, pin_memory=True):
         super(TrainModel, self).__init__()
-        # self.args = args
 
-        # self.train_loader = train_loader
-        # self.max_step = self.train_loader.__len__()
-        # self.test_loader = test_loader
-        # self.model = my_model
-
-        # Shardul Main part -- loss is left
         if loss in None:
             self.loss = nn.L1Loss()
 
@@ -40,6 +31,7 @@ class TrainModel(CAIN):
 
         self.depth = depth
 
+        print('==> Building model ')
         if cain_model is not None:
             if cain_model == 'cain':
                 self.model = CAIN(depth=self.depth)
@@ -54,18 +46,20 @@ class TrainModel(CAIN):
         else:
             self.model = CAIN(depth=self.depth)
 
-        # Shifting model to the required location
-        # Shardul check what to do about device
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
         if use_dataparallel is True:
             self.model = torch.nn.DataParallel(self.model).to(device)
 
-
+        print('==> Building training set ')
         # give the expected location too
         if train_set is None:
             self.train_set = TrainCAIN(data_root=train_dir)
         else:
             self.train_set = train_set
 
+
+        print('==> Building training data loader ')
         if train_data_loader is None:
             self.train_loader = DataLoader(dataset=self.train_set, batch_size=batch_size, shuffle=shuffle, num_workers=0, pin_memory=True)
         else:
@@ -83,11 +77,13 @@ class TrainModel(CAIN):
         else:
             self.start_epoch = start_epoch
 
+        print('==> Building optimizer ')
         if optimizer is None:
             self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
         else:
             self.optimizer = optimizer
 
+        print('==> Building scheduler ')
         if scheduler is None:
             self.scheduler = lr_scheduler.ReduceLROnPlateau(self.optimizer,mode='min', factor=0.5, patience=5, verbose=True)
         else:
@@ -115,6 +111,7 @@ class TrainModel(CAIN):
 
     def __call__(self, *args, **kwargs):
         self.model.train()
+        print('==> Training has started ')
         for running_epoch in range(self.start_epoch, self.total_epochs):
             for i, (images, imgpaths) in enumerate(self.train_loader):
 
@@ -127,7 +124,7 @@ class TrainModel(CAIN):
                 loss = self.loss(out, gt)
 
                 # Save loss values
-                # Shardul check what to do about these losses
+                # currently will not use these losses
                 # for k, v in losses.items():
                 #     if k != 'total':
                 #         v.update(loss_specific[k].item())
@@ -135,7 +132,6 @@ class TrainModel(CAIN):
                 #     LOSS_0 = loss.data.item()
                 # losses['total'].update(loss.item())
 
-                # Backward (+ grad clip) - if loss explodes, skip current iteration
                 loss.backward()
                 # shardul comment
                 # if loss.data.item() > 10.0 * LOSS_0:
@@ -161,28 +157,16 @@ class TrainModel(CAIN):
                 #     losses, psnrs, ssims, lpips = utils.init_meters(args.loss)
                 #     t = time.time()
 
-            if batch_idx % self.batch_display_step == 0:
+            if i % self.batch_display_step == 0:
                     print('{:<13s}{:<14s}{:<6s}{:<16s}{:<12s}{:<20.16f}'.format('Train Epoch: ',
                                                                                 '[' + str(running_epoch + 1) + '/' + str(
                                                                                     self.total_epochs) + ']', 'Step: ',
-                                                                                '[' + str(batch_idx) + '/' + str(
+                                                                                '[' + str(i) + '/' + str(
                                                                                     self.max_step) + ']', 'train loss: ',
                                                                                 loss.item()))
-            # SHARDUL FIX
-            test_loss, psnr, _, _ = test(args, epoch)
-
-            # save checkpoint
-            is_best = psnr > best_psnr
-            best_psnr = max(psnr, best_psnr)
-            utils.save_checkpoint({
-                'epoch': epoch,
-                'state_dict': model.state_dict(),
-                'optimizer': optimizer.state_dict(),
-                'best_psnr': best_psnr
-            }, is_best, args.exp_name)
 
             # update optimizer policy
-            scheduler.step(test_loss)
+            self.scheduler.step(loss)
             ############
 
 

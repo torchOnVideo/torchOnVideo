@@ -32,7 +32,8 @@ torchOnVideo aims to accelerate video deep learning research and interest and ai
 ## Installation
 
 ~~~bash
-pip install torchOnVideo
+python setup.py bdist_wheel
+pip install -e torchOnVideo/dist/torchOnVideo-0.1.0-py3-none-any.whl
 ~~~
 
 ## Current subtasks and papers supported
