@@ -14,15 +14,30 @@ torchOnVideo aims to accelerate video deep learning research and interest and ai
 
 **Overview**
 
-* [`torchOnVideo.datasets`](http://learn2learn.net/docs/learn2learn.data/): Set of all custom dataset classes and utilities for video based datasets.
-* [`torchOnVideo.frame_interpolation`](http://learn2learn.net/docs/learn2learn.vision/): Models, classes and utilities related to video frame interpolation.
-* [`torchOnVideo.super_resolution`](http://learn2learn.net/docs/learn2learn.gym/): Models, classes and utilities related to video frame interpolation.
-* [`torchOnVideo.denoising`](http://learn2learn.net/docs/learn2learn.algorithms/): Models, classes and utilities related to video denoising.
-* [`torchOnVideo.tracking`](http://learn2learn.net/docs/learn2learn.optim/): Models, classes and utilities related to multi object tracking.
-* [`torchOnVideo.video_captioning`](http://learn2learn.net/docs/learn2learn.optim/):Models, classes and utilities related to video captioning.
-* [`torchOnVideo.losses`](http://learn2learn.net/docs/learn2learn.optim/): Utilities and losses for video based deep learning.
-* [`torchOnVideo.metrics`](http://learn2learn.net/docs/learn2learn.optim/): Utilities and metrics for video based deep learning.
+* [`torchOnVideo.datasets`](https://github.com/torchOnVideo/torchOnVideo): Set of all custom dataset classes and utilities for video based datasets.
+* [`torchOnVideo.frame_interpolation`](https://github.com/torchOnVideo/torchOnVideo): Models, classes and utilities related to video frame interpolation.
+* [`torchOnVideo.super_resolution`](https://github.com/torchOnVideo/torchOnVideo): Models, classes and utilities related to video frame interpolation.
+* [`torchOnVideo.denoising`](https://github.com/torchOnVideo/torchOnVideo): Models, classes and utilities related to video denoising.
+* [`torchOnVideo.tracking`](https://github.com/torchOnVideo/torchOnVideo): Models, classes and utilities related to multi object tracking.
+* [`torchOnVideo.video_captioning`](https://github.com/torchOnVideo/torchOnVideo):Models, classes and utilities related to video captioning.
+* [`torchOnVideo.losses`](https://github.com/torchOnVideo/torchOnVideo): Utilities and losses for video based deep learning.
+* [`torchOnVideo.metrics`](https://github.com/torchOnVideo/torchOnVideo): Utilities and metrics for video based deep learning.
 
+**Resources**
+
+* Website: *Coming very soon!*
+* GitHub: [https://github.com/torchOnVideo/torchOnVideo](https://github.com/learnables/learn2learn/)
+
+
+## Installation
+
+~~~bash
+pip install torchOnVideo
+~~~
+
+## Snippets & Examples
+
+The following snippets provide a sneak peek at the functionalities of torchOnVideo.
 
 
 
