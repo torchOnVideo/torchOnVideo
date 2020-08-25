@@ -35,6 +35,15 @@ torchOnVideo aims to accelerate video deep learning research and interest and ai
 pip install torchOnVideo
 ~~~
 
+## Current subtasks and papers supported
+*The paper name is in brackets*
+* Frame Interpolation (CAIN, AdaCoF)
+* Video SuperResolution (iSeeBetter, SOFVSR)
+* Video denoising(VNLNet)
+* Multiple Object Tracking (Fair MOT, Towards Real Time MOT) 
+* Video Captioning (SALSTM)
+
+
 ## Snippets & Examples
 
 
@@ -92,12 +101,6 @@ For eg if one wants to use the TrainAdaCoF dataset class built in the *Vimeo90K 
 from torchOnVideo.datasets.Vimeo90KTriplet.frame_interpolation import TrainAdaCoF
 train_set = TrainAdaCoF()
 ~~~
-
-
-
-
-
-
 
 
 
