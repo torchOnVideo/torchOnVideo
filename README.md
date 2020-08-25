@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/torchOnVideo/torchOnVideo/blob/combined_modules/docs/source/_static/img/TorchOnVideoLogo.png" height="360px" /></p>
+<p align="center"><img src="https://github.com/torchOnVideo/torchOnVideo/blob/combined_modules/docs/source/_static/img/torchOnVideoLogo.png" height="360px" /></p>
 
 --------------------------------------------------------------------------------
 
@@ -117,6 +117,12 @@ https://github.com/amanchadha/iSeeBetter
 https://github.com/axeldavy/vnlnet
 
 https://github.com/learnables/learn2learn/blob/master/README.md
+
+https://github.com/Zhongdao/Towards-Realtime-MOT
+
+https://github.com/ifzhang/FairMOT
+
+
 
 
 
