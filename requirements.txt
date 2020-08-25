@@ -6,3 +6,15 @@ opencv-python
 scikit-image
 tqdm
 pytorch-ssim
+yacs
+cython-bbox
+scipy
+numba
+progress
+motmetrics
+numba
+matplotlib
+lap
+openpyxl
+Pillow
+tensorboardX
