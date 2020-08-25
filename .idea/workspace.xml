@@ -2,27 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59eac7d1-6550-4a57-b74f-ecdf4a3f2878" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/frame_interpolation/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/frame_interpolation/test_adacof.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Middlebury/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Middlebury/frame_interpolation/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Middlebury/frame_interpolation/test_adacof.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/UCF101/frame_interpolation/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/UCF101/frame_interpolation/test_adacof.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/test_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/test_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/iseebetter/test_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/metrics/metrics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/test_SOFVSR.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/test_SOFVSR.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/test_vnlnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/test_vnlnet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/SNU_Film/frame_interpolation/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/SNU_Film/frame_interpolation/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/SPMCS/super_resolution/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/SPMCS/super_resolution/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/test_SOFVSR.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/test_SOFVSR.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/evaluate_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/test_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/metrics/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/metrics/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
