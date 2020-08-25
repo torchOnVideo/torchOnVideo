@@ -1,1 +1,1 @@
-from .test_cain import  Tes
+from .test_cain import  TestCAIN
