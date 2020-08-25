@@ -14,23 +14,6 @@ from torchOnVideo.datasets.CVDL.super_resolution import TrainSOFVSR
 from torchOnVideo.losses import OFR_loss
 
 
-# gpu mode
-# config
-# why does this paper not need  any epochs?
-
-parser = argparse.ArgumentParser()
-parser.add_argument("--degradation", type=str, default='BI')
-parser.add_argument("--scale", type=int, default=4)
-# Shardul Change here
-# parser.add_argument('--gpu_mode', type=bool, default=True)
-parser.add_argument('--gpu_mode', type=bool, default=False
-                    )
-parser.add_argument('--patch_size', type=int, default=32)
-parser.add_argument('--batch_size', type=int, default=32)
-parser.add_argument('--n_iters', type=int, default=200000, help='number of iterations to train')
-parser.add_argument('--trainset_dir', type=str, default='data/train')
-# return parser.parse_args()
-
 class TrainModel(SOF_VSR):
     def __init__(self, model=None, train_set=None, train_dir='../../db/CVDL_SOFVSR_traindata',
                  train_data_loader=None, loss=None, checkpoint=None, start_epoch=0, use_start_epoch_checkpoint=False,
@@ -39,36 +22,43 @@ class TrainModel(SOF_VSR):
                  epochs=20, batch_size=32, shuffle=True, num_workers=4,
                  n_iters=200000,
                  optimizer=None, lr=1e-3, milestone=[80000, 16000],
-                 scheduler=None,
+                 scheduler=None, gpu_mode=False,
                  epoch_display_step=1, batch_display_step=1,
                  run_validation=False, val_dir="../../db/f16_vnlnet_valdata", val_set=None, val_loader=None):
 
         super(TrainModel, self).__init__(scale=scale)
 
-        self.degradationn = degradation
+        self.degradation = degradation
+        self.gpu_mode = gpu_mode
 
+        print('==> Building training set ')
         if train_set is None:
             self.train_set = TrainSOFVSR(trainset_dir=train_dir, scale=scale, patch_size=patch_size, n_iters=n_iters,
                                          batch_size=batch_size, degradation=degradation)
         else:
             self.train_set = train_set
 
+
+        print('==> Building training data loader ')
         if train_data_loader is None:
             self.train_loader = DataLoader(dataset=self.train_set, batch_size=batch_size, shuffle=shuffle,
                                            num_workers=num_workers)
         else:
             self.train_loader = train_data_loader
 
+        print('==> Building model ')
         if model is None:
             self.model = SOFVSR(scale=scale)
         else:
             self.model = model
 
+        print('==> Building optimizer ')
         if optimizer is None:
             self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
         else:
             self.optimizer = optimizer
 
+        print('==> Building scheduler ')
         if scheduler is None:
             self.scheduler = lr_scheduler.MultiStepLR(self.optimizer, milestones=milestone, gamma=0.01)
         else:
@@ -83,6 +73,7 @@ class TrainModel(SOF_VSR):
 
     def __call__(self, *args, **kwargs):
         self.model.train()
+        print('==> Training has started ')
         loss_list = []
         for idx_iter, (LR, HR) in enumerate(self.train_loader):
             self.scheduler.step()
@@ -93,10 +84,10 @@ class TrainModel(SOF_VSR):
 
             LR, HR = Variable(LR), Variable(HR)
 
-            # SHardul check gpu
-            # if cfg.gpu_mode:
-            #     LR = LR.cuda()
-            #     HR = HR.cuda()
+
+            if self.gpu_mode:
+                LR = LR.cuda()
+                HR = HR.cuda()
             LR = LR.view(b, -1, 1, h_lr, w_lr)
             HR = HR.view(b, -1, 1, h_lr * self.scale, w_lr * self.scale)
 
@@ -127,14 +118,13 @@ class TrainModel(SOF_VSR):
             self.optimizer.step()
 
             # save checkpoint
-            # Shardul saving
-            # if idx_iter % 5000 == 0:
-            #     print('Iteration---%6d,   loss---%f' % (idx_iter + 1, np.array(loss_list).mean()))
-            #     save_path = 'log/' + self.degradation + '_x' + str(self.scale)
-            #     save_name = self.degradation + '_x' + str(self.scale) + '_iter' + str(idx_iter) + '.pth'
-            #     if not os.path.exists(save_path):
-            #         os.mkdir(save_path)
-            #     torch.save(self.model.state_dict(), save_path + '/' + save_name)
-            #     loss_list = []
+            if idx_iter % 5000 == 0:
+                print('Iteration---%6d,   loss---%f' % (idx_iter + 1, np.array(loss_list).mean()))
+                save_path = 'log/' + self.degradation + '_x' + str(self.scale)
+                save_name = self.degradation + '_x' + str(self.scale) + '_iter' + str(idx_iter) + '.pth'
+                if not os.path.exists(save_path):
+                    os.mkdir(save_path)
+                torch.save(self.model.state_dict(), save_path + '/' + save_name)
+                loss_list = []
 
 

@@ -10,46 +10,6 @@ from torchOnVideo.losses import AdaCoF_loss
 from torchOnVideo.datasets.Vimeo90KTriplet.frame_interpolation import TrainAdaCoF
 from torchOnVideo.frame_interpolation.utils import to_variable
 
-parser = argparse.ArgumentParser(description='AdaCoF-Pytorch')
-
-# parameters
-# Model Selection
-parser.add_argument('--model', type=str, default='adacofnet')
-
-# Hardware Setting
-parser.add_argument('--gpu_id', type=int, default=0)
-
-# Directory Setting
-parser.add_argument('--train', type=str, default='./db/vimeo_triplet')
-parser.add_argument('--out_dir', type=str, default='./output_adacof_train')
-parser.add_argument('--load', type=str, default=None)
-parser.add_argument('--test_input', type=str, default='./test_input/middlebury_others/input')
-parser.add_argument('--gt', type=str, default='./test_input/middlebury_others/gt')
-
-# Learning Options
-parser.add_argument('--epochs', type=int, default=50, help='Max Epochs')
-parser.add_argument('--batch_size', type=int, default=4, help='Batch size')
-parser.add_argument('--loss', type=str, default='1*Charb+0.01*g_Spatial+0.005*g_Occlusion', help='loss function configuration')
-parser.add_argument('--patch_size', type=int, default=256, help='Patch size')
-
-# Optimization specifications
-parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
-parser.add_argument('--lr_decay', type=int, default=20, help='learning rate decay per N epochs')
-parser.add_argument('--decay_type', type=str, default='step', help='learning rate decay type')
-parser.add_argument('--gamma', type=float, default=0.5, help='learning rate decay factor for step decay')
-parser.add_argument('--optimizer', default='ADAMax', choices=('SGD', 'ADAM', 'RMSprop', 'ADAMax'), help='optimizer to use (SGD | ADAM | RMSprop | ADAMax)')
-parser.add_argument('--weight_decay', type=float, default=0, help='weight decay')
-
-# Options for AdaCoF
-parser.add_argument('--kernel_size', type=int, default=5)
-parser.add_argument('--dilation', type=int, default=1)
-
-# transform = transforms.Compose([transforms.ToTensor()])
-
-# left out GPU ID
-# If train Loader is set to None
-# Use the one present in the default location
-# We will provide both batch size if train_loader is not provided
 class TrainModel(AdaCoF):
     def __init__(self, model=None, train_set=None, train_dir='../../db/Vimeo90K_Triplet_AdaCoF', random_crop = None,resize = None, augment_s=True, augment_t=True,
                  train_data_loader = None, loss=None, checkpoint=None, start_epoch = 0, use_start_epoch_checkpoint=False,
@@ -76,11 +36,13 @@ class TrainModel(AdaCoF):
         # self.current_epoch = start_epoch
 
         # give the expected location too
+        print('==> Building training set ')
         if train_set is None:
             self.train_set = TrainAdaCoF(train_dir, random_crop=random_crop, resize=resize, augment_s=augment_s, augment_t=augment_t)
         else:
             self.train_set = train_set
 
+        print('==> Building training data loader ')
         if train_data_loader is None:
             self.train_loader = DataLoader(dataset=self.train_set, batch_size=batch_size, shuffle=True, num_workers=0)
         else:
@@ -88,6 +50,7 @@ class TrainModel(AdaCoF):
 
         self.max_step = self.train_loader.__len__()
 
+        print('==> Building model ')
         if model is None:
             self.model = AdaCoFNet(kernel_size, dilation)
         else:
@@ -103,11 +66,13 @@ class TrainModel(AdaCoF):
         else:
             self.start_epoch = start_epoch
 
+        print('==> Building optimizer ')
         if optimizer is None:
             self.optimizer = optim.Adamax(self.model.parameters(), lr=lr)
         else:
             self.optimizer = optimizer
 
+        print('==> Building scheduler ')
         if scheduler is None:
             self.scheduler = lr_scheduler.StepLR(self.optimizer, step_size=20, gamma=0.5)
         else:
@@ -134,6 +99,7 @@ class TrainModel(AdaCoF):
         self.batch_display_step = batch_display_step
 
     def __call__(self, *args, **kwargs):
+        print('==> Training has started ')
         self.model.train()
         for running_epoch in range(self.start_epoch, self.total_epochs):
             for batch_idx, (frame0, frame1, frame2) in enumerate(self.train_loader):
