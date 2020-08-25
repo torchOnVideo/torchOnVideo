@@ -2,8 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59eac7d1-6550-4a57-b74f-ecdf4a3f2878" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/frame_interpolation/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/frame_interpolation/test_adacof.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Middlebury/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Middlebury/frame_interpolation/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/Middlebury/frame_interpolation/test_adacof.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/UCF101/frame_interpolation/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/datasets/UCF101/frame_interpolation/test_adacof.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/test_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/test_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/iseebetter/test_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/test_SOFVSR.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/CVDL/super_resolution/test_SOFVSR.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/test_vnlnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/DAVIS/denoising/test_vnlnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/SNU_Film/frame_interpolation/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/SNU_Film/frame_interpolation/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/SPMCS/super_resolution/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/SPMCS/super_resolution/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/test_SOFVSR.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/datasets/vid4/super_resolution/test_SOFVSR.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torchOnVideo/super_resolution/SOF_VSR/evaluate_model.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,46 +140,46 @@
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state x="582" y="344" width="812" height="432" key="#com.intellij.fileTypes.FileTypeChooser/67.34.1853.1046@67.34.1853.1046" timestamp="1598254450991" />
-    <state x="661" y="247" width="655" height="626" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598322006570">
+    <state x="661" y="247" width="655" height="626" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598379589040">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state x="661" y="247" width="655" height="626" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.34.1853.1046@67.34.1853.1046" timestamp="1598322006570" />
+    <state x="661" y="247" width="655" height="626" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.34.1853.1046@67.34.1853.1046" timestamp="1598379589040" />
     <state x="723" y="258" width="530" height="605" key="FileChooserDialogImpl" timestamp="1598260180454">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state x="723" y="258" width="530" height="605" key="FileChooserDialogImpl/67.34.1853.1046@67.34.1853.1046" timestamp="1598260180454" />
-    <state width="1825" height="3" key="GridCell.Tab.0.bottom" timestamp="1598322000524">
+    <state width="1825" height="3" key="GridCell.Tab.0.bottom" timestamp="1598379740252">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.0.bottom/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000524" />
-    <state width="1825" height="3" key="GridCell.Tab.0.center" timestamp="1598322000523">
+    <state width="1825" height="3" key="GridCell.Tab.0.bottom/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740252" />
+    <state width="1825" height="3" key="GridCell.Tab.0.center" timestamp="1598379740252">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.0.center/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000523" />
-    <state width="1825" height="3" key="GridCell.Tab.0.left" timestamp="1598322000521">
+    <state width="1825" height="3" key="GridCell.Tab.0.center/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740252" />
+    <state width="1825" height="3" key="GridCell.Tab.0.left" timestamp="1598379740251">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.0.left/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000521" />
-    <state width="1825" height="3" key="GridCell.Tab.0.right" timestamp="1598322000524">
+    <state width="1825" height="3" key="GridCell.Tab.0.left/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740251" />
+    <state width="1825" height="3" key="GridCell.Tab.0.right" timestamp="1598379740252">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.0.right/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000524" />
-    <state width="1825" height="3" key="GridCell.Tab.1.bottom" timestamp="1598322000528">
+    <state width="1825" height="3" key="GridCell.Tab.0.right/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740252" />
+    <state width="1825" height="3" key="GridCell.Tab.1.bottom" timestamp="1598379740252">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.1.bottom/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000528" />
-    <state width="1825" height="3" key="GridCell.Tab.1.center" timestamp="1598322000526">
+    <state width="1825" height="3" key="GridCell.Tab.1.bottom/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740252" />
+    <state width="1825" height="3" key="GridCell.Tab.1.center" timestamp="1598379740252">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.1.center/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000526" />
-    <state width="1825" height="3" key="GridCell.Tab.1.left" timestamp="1598322000525">
+    <state width="1825" height="3" key="GridCell.Tab.1.center/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740252" />
+    <state width="1825" height="3" key="GridCell.Tab.1.left" timestamp="1598379740252">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.1.left/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000525" />
-    <state width="1825" height="3" key="GridCell.Tab.1.right" timestamp="1598322000527">
+    <state width="1825" height="3" key="GridCell.Tab.1.left/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740252" />
+    <state width="1825" height="3" key="GridCell.Tab.1.right" timestamp="1598379740252">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state width="1825" height="3" key="GridCell.Tab.1.right/67.34.1853.1046@67.34.1853.1046" timestamp="1598322000527" />
+    <state width="1825" height="3" key="GridCell.Tab.1.right/67.34.1853.1046@67.34.1853.1046" timestamp="1598379740252" />
     <state x="359" y="104" width="1269" height="912" key="SettingsEditor" timestamp="1596959917165">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
@@ -181,10 +200,10 @@
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
     <state x="555" y="206" width="875" height="663" key="recent.locations.popup/67.34.1853.1046@67.34.1853.1046" timestamp="1598318651014" />
-    <state x="573" y="22" width="840" height="1032" key="search.everywhere.popup" timestamp="1598292011587">
+    <state x="573" y="22" width="840" height="1032" key="search.everywhere.popup" timestamp="1598381127917">
       <screen x="67" y="34" width="1853" height="1046" />
     </state>
-    <state x="573" y="22" width="840" height="1032" key="search.everywhere.popup/67.34.1853.1046@67.34.1853.1046" timestamp="1598292011587" />
+    <state x="573" y="22" width="840" height="1032" key="search.everywhere.popup/67.34.1853.1046@67.34.1853.1046" timestamp="1598381127917" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

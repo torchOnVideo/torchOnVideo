@@ -29,3 +29,8 @@ def build_input_CAIN(images, imgpaths, is_training=True, include_edge=False, dev
     gt = images[1].to(device)
 
     return im1, im2, gt
+
+def to_variable(x):
+    if torch.cuda.is_available():
+        x = x.cuda()
+    return Variable(x)
