@@ -127,6 +127,7 @@ https://github.com/hobincar/SA-LSTM
 
 https://github.com/MDSKUL/MasterProject
 
+https://github.com/aizvorski/video-quality
 
 
 
