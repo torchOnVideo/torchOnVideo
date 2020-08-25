@@ -1,17 +1,6 @@
 import torch
 import os
 
-parser = argparse.ArgumentParser(description='Frame Interpolation Evaluation')
-
-parser.add_argument('--gpu_id', type=int, default=0)
-parser.add_argument('--model', type=str, default='adacofnet')
-parser.add_argument('--checkpoint', type=str, default='./checkpoint/kernelsize_5/ckpt.pth')
-parser.add_argument('--config', type=str, default='./checkpoint/kernelsize_5/config.txt')
-parser.add_argument('--out_dir', type=str, default='./output_adacof_test')
-
-parser.add_argument('--kernel_size', type=int, default=5)
-parser.add_argument('--dilation', type=int, default=1)
-
 from .adacof import AdaCoF
 from ..models import AdaCoFNet
 from torchOnVideo.losses import AdaCoF_loss
@@ -22,11 +11,13 @@ class TestModel(AdaCoF):
                  input_dir="../db/frame_interpolation/adacof/middlebury/input",
                  gt_dir="../db/frame_interpolation/adacof/middlebury/gt",
                  kernel_size=5, dilation=1, gpu_id=0, output_name='frame10i11.png'):
+        super(TestModel, self).__init__()
         torch.cuda.set_device(gpu_id)
         self.kernel_size = kernel_size
         self.dilation = dilation
         self.input_dir = input_dir
         self.gt_dir = gt_dir
+        self.test_set = testset
 
         self.model = AdaCoFNet(self.kernel_size, self.dilation)
 
@@ -38,11 +29,10 @@ class TestModel(AdaCoF):
 
         self.output_name = output_name
 
-
     def __call__(self, *args, **kwargs):
 
         test_dir = self.out_dir
-        test_db = TestAdaCoF(self.input_dir, self.gt_dir)
+        test_db = self.test_set(self.input_dir, self.gt_dir)
         if not os.path.exists(test_dir):
             os.makedirs(test_dir)
         test_db.Test(self.model, test_dir, self.current_epoch, output_name=self.output_name)
