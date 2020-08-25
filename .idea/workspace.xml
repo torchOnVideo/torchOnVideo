@@ -2,9 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59eac7d1-6550-4a57-b74f-ecdf4a3f2878" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/torchOnVideo/frame_interpolation/adacof/train_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/bleu/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/bleu/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/bleu/bleu.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/bleu/bleu_scorer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/cider/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/cider/cider.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/cider/cider_scorer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/meteor/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/meteor/data/paraphrase-en.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/meteor/meteor-1.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/meteor/meteor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/rouge/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/rouge/rouge.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/Meteor-1.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/SceneGraphParser-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/ejml-0.23.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/fst-2.47.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/guava-19.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/hamcrest-core-1.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/jackson-core-2.5.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/javassist-3.19.0-GA.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/json-simple-1.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/junit-4.12.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/lmdbjni-0.4.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/lmdbjni-linux64-0.4.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/lmdbjni-osx64-0.4.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/lmdbjni-win64-0.4.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/objenesis-2.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/slf4j-api-1.7.12.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/lib/slf4j-simple-1.7.21.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/spice-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Metrics/spice/spice.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
