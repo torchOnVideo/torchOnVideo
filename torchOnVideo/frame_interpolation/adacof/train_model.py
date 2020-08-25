@@ -27,7 +27,6 @@ class TrainModel(AdaCoF):
         # self.test_loader = test_loader
         # self.model = my_model
 
-        # Shardul Main part -- loss is left
         if loss in None:
             self.loss = AdaCoF_loss()
         else:
@@ -35,7 +34,6 @@ class TrainModel(AdaCoF):
 
         # self.current_epoch = start_epoch
 
-        # give the expected location too
         print('==> Building training set ')
         if train_set is None:
             self.train_set = TrainAdaCoF(train_dir, random_crop=random_crop, resize=resize, augment_s=augment_s, augment_t=augment_t)
